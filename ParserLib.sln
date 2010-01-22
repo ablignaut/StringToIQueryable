@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParserLib", "ParserLib\ParserLib.csproj", "{A848647C-56F1-4C3D-8849-953C9DFAAABA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueryParser", "QueryParser\QueryParser.csproj", "{F56D2B63-A222-4A60-B90C-A761D1562821}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueryParserTests", "QueryParserTests\QueryParserTests.csproj", "{C838111B-E7B8-41A5-99A4-B26574667461}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A848647C-56F1-4C3D-8849-953C9DFAAABA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A848647C-56F1-4C3D-8849-953C9DFAAABA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A848647C-56F1-4C3D-8849-953C9DFAAABA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A848647C-56F1-4C3D-8849-953C9DFAAABA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F56D2B63-A222-4A60-B90C-A761D1562821}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F56D2B63-A222-4A60-B90C-A761D1562821}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F56D2B63-A222-4A60-B90C-A761D1562821}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F56D2B63-A222-4A60-B90C-A761D1562821}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C838111B-E7B8-41A5-99A4-B26574667461}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C838111B-E7B8-41A5-99A4-B26574667461}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C838111B-E7B8-41A5-99A4-B26574667461}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C838111B-E7B8-41A5-99A4-B26574667461}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

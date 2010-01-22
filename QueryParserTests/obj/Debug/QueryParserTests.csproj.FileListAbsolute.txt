@@ -1,0 +1,13 @@
+C:\Users\Zack\Documents\Products\ParserLib\QueryParserTests\bin\Debug\QueryParserTests.dll
+C:\Users\Zack\Documents\Products\ParserLib\QueryParserTests\bin\Debug\QueryParserTests.pdb
+C:\Users\Zack\Documents\Products\ParserLib\QueryParserTests\bin\Debug\ParserLib.dll
+C:\Users\Zack\Documents\Products\ParserLib\QueryParserTests\bin\Debug\QueryParser.dll
+C:\Users\Zack\Documents\Products\ParserLib\QueryParserTests\bin\Debug\xunit.dll
+C:\Users\Zack\Documents\Products\ParserLib\QueryParserTests\bin\Debug\QueryParser.pdb
+C:\Users\Zack\Documents\Products\ParserLib\QueryParserTests\bin\Debug\ParserLib.pdb
+C:\Users\Zack\Documents\Products\ParserLib\QueryParserTests\bin\Debug\xunit.xml
+C:\Users\Zack\Documents\Products\ParserLib\QueryParserTests\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Zack\Documents\Products\ParserLib\QueryParserTests\obj\Debug\QueryParserTests.dll
+C:\Users\Zack\Documents\Products\ParserLib\QueryParserTests\obj\Debug\QueryParserTests.pdb
+C:\Users\Zack\Documents\Products\ParserLib\QueryParserTests\bin\Debug\xunit.extensions.dll
+C:\Users\Zack\Documents\Products\ParserLib\QueryParserTests\bin\Debug\xunit.extensions.xml
