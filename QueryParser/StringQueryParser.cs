@@ -19,15 +19,18 @@ namespace QueryParser
             if (string.IsNullOrEmpty(expressions))
                 return new List<IParserExpression<T>>();
 
-            return IgnoreSeparatorParser.Or(PageParser)
-                                        .Or(SkipParser)
-                                        .Or(TakeParser)
-                                        .Or(SortParser)
-                                        .Or(WhereParser)
-                                        .Repeat()
-                                        .Invoke(expressions)
-                                        .Parsed
-                                        .Where(x => x != null);
+            Func<string, Predicate<string>> startsWith = str => test => test.StartsWith(str);
+
+            return Parser.When(startsWith(ParserConstants.ExpressionSeparator.ToString()), IgnoreSeparatorParser)
+                         .OrWhen(startsWith(ParserConstants.PageIndicator), PageParser)
+                         .OrWhen(startsWith(ParserConstants.SkipIndicator), SkipParser)
+                         .OrWhen(startsWith(ParserConstants.TakeIndicator), TakeParser)
+                         .OrWhen(startsWith(ParserConstants.SortIndicator), SortParser)
+                         .Or(WhereParser)
+                         .Repeat()
+                         .Invoke(expressions)
+                         .Parsed
+                         .Where(x => x != null);
         }
 
         public IQueryable<T> Map(IQueryable<T> queriable)
@@ -42,12 +45,7 @@ namespace QueryParser
         {
             get
             {
-                return input =>
-                {
-                    if (!input.StartsWith(ParserConstants.ExpressionSeparator.ToString()))
-                        return null;
-                    return new ParserResult<IParserExpression<T>>(null, input.TrimStart(ParserConstants.ExpressionSeparator));
-                };
+                return input => new ParserResult<IParserExpression<T>>(null, input.TrimStart(ParserConstants.ExpressionSeparator));
             }
         }
 
@@ -57,8 +55,6 @@ namespace QueryParser
             {
                 return input =>
                     {
-                        if (!input.StartsWith(ParserConstants.SortIndicator, StringComparison.OrdinalIgnoreCase))
-                            return null;
                         string rest;
                         string sortRemoved = input.SeparateAt(ParserConstants.ExpressionSeparator, out rest)
                                                   .Replace(ParserConstants.SortIndicator, "");
@@ -83,8 +79,6 @@ namespace QueryParser
             {
                 return input =>
                 {
-                    if (!input.StartsWith(ParserConstants.SkipIndicator, StringComparison.OrdinalIgnoreCase))
-                        return null;
                     string rest;
                     string skipNumberToParse = input.SeparateAt(ParserConstants.ExpressionSeparator, out rest)
                                                     .Replace(ParserConstants.SkipIndicator, "");
@@ -107,9 +101,6 @@ namespace QueryParser
             {
                 return input =>
                 {
-                    if (!input.StartsWith(ParserConstants.TakeIndicator) || string.IsNullOrEmpty(input))
-                        return null;
-
                     string rest;
                     string takeNumberToParse = input.SeparateAt(ParserConstants.ExpressionSeparator, out rest)
                                                     .Replace(ParserConstants.TakeIndicator, "");
@@ -136,8 +127,6 @@ namespace QueryParser
             {
                 return input =>
                 {
-                    if (!input.StartsWith(ParserConstants.PageIndicator) || string.IsNullOrEmpty(input))
-                        return null;
                     int pagenum = 1, pagesize = ParserConstants.DefaultPageSize;
                     string rest;
                     string[] pageExpr = input.SeparateAt(ParserConstants.ExpressionSeparator, out rest)

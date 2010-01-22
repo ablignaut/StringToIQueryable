@@ -113,5 +113,29 @@ namespace ParserLib
                 return new ParserResult<IEnumerable<TValue>>(list.AsEnumerable(), string.Empty);
             };
         }
+
+        public static Parse<T> When<T>(Predicate<string> inputPredicate, Parse<T> parser)
+        {
+            return input =>
+            {
+                if (inputPredicate(input))
+                    return parser(input);
+                return null;
+            };
+        }
+
+        public static Parse<T> OrWhen<T>(this Parse<T> orig, Predicate<string> inputPredicate, Parse<T> parser)
+        {
+            return input =>
+            {
+                var origResult = orig(input);
+
+                if (origResult != null)
+                    return origResult;
+                if (inputPredicate(input))
+                    return parser(input);
+                return null;
+            };
+        }
     }
 }
