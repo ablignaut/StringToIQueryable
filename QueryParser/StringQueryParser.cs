@@ -8,10 +8,27 @@ namespace QueryParser
     public class StringQueryParser<T>
     {
         private string expressions;
-
         public StringQueryParser(string exprs)
         {
             expressions = exprs.ToLower();
+        }
+
+        protected Predicate<string> StartsWith(string test)
+        {
+            return str => str.StartsWith(test);
+        }
+
+        protected virtual Parse<IParserExpression<T>> Parsers
+        {
+            get
+            {
+                return Parser.When(StartsWith(ParserConstants.ExpressionSeparator.ToString()), IgnoreSeparatorParser)
+                         .OrWhen(StartsWith(ParserConstants.PageIndicator), PageParser)
+                         .OrWhen(StartsWith(ParserConstants.SkipIndicator), SkipParser)
+                         .OrWhen(StartsWith(ParserConstants.TakeIndicator), TakeParser)
+                         .OrWhen(StartsWith(ParserConstants.SortIndicator), SortParser)
+                         .Or(WhereParser); 
+            }
         }
 
         public IEnumerable<IParserExpression<T>> Parse()
@@ -19,18 +36,10 @@ namespace QueryParser
             if (string.IsNullOrEmpty(expressions))
                 return new List<IParserExpression<T>>();
 
-            Func<string, Predicate<string>> startsWith = str => test => test.StartsWith(str);
-
-            return Parser.When(startsWith(ParserConstants.ExpressionSeparator.ToString()), IgnoreSeparatorParser)
-                         .OrWhen(startsWith(ParserConstants.PageIndicator), PageParser)
-                         .OrWhen(startsWith(ParserConstants.SkipIndicator), SkipParser)
-                         .OrWhen(startsWith(ParserConstants.TakeIndicator), TakeParser)
-                         .OrWhen(startsWith(ParserConstants.SortIndicator), SortParser)
-                         .Or(WhereParser)
-                         .Repeat()
-                         .Invoke(expressions)
-                         .Parsed
-                         .Where(x => x != null);
+            return Parsers.Repeat()
+                          .Invoke(expressions)
+                          .Parsed
+                          .Where(x => x != null);
         }
 
         public IQueryable<T> Map(IQueryable<T> queriable)
